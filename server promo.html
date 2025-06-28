@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desi SMP Promotion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background: radial-gradient(ellipse at bottom, #0d1a26 0%, #000000 100%);
+      pointer-events: none;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      z-index: 2;
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      color: #00ffcc;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #ffcc00;
+      font-weight: bold;
+    }
+
+    .yt-button, .ip-box {
+      margin-top: 20px;
+      display: inline-block;
+      background: #ff0000;
+      padding: 12px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .yt-button:hover, .ip-box:hover {
+      transform: scale(1.1);
+    }
+
+    .ip-box {
+      background: #1abc9c;
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+      }
+      50% {
+        box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+      }
+    }
+
+    .glow {
+      animation: glow 2s infinite;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .emoji {
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container glow">
+  <h1>🔥 Desi SMP 🔥</h1>
+  <p>Welcome to <span class="highlight">Desi SMP</span> – India ka sabse entertaining Minecraft survival server!</p>
+
+  <div class="section">
+    <h2>🎮 Server Info</h2>
+    <p><strong>IP:</strong> <span id="server-ip">Desi_SMP.aternos.me</span><br>
+      <strong>Version:</strong> 1.20+<br>
+      <strong>Mode:</strong> Private Lifesteal SMP</p>
+    <a class="ip-box" onclick="copyIP()">📋 Copy IP</a>
+  </div>
+
+  <div class="section">
+    <h2>ℹ️ About Server</h2>
+    <p>
+      <span class="emoji">💥</span> Pure desi style SMP – memes, masti aur Minecraft ka full tadka!<br>
+      <span class="emoji">🛡️</span> Lifesteal PvP with trustable admins aur no hackers!<br>
+      <span class="emoji">🎉</span> Funny commands, giveaways, memes & Indian server vibes.<br>
+      <span class="emoji">💎</span> Private & secure – sirf real players ke liye.<br>
+      <span class="emoji">⚔️</span> Regular events, memes, and chaati-thok PvP battles!
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>📺 YouTube Channel</h2>
+    <p>Subscribe karo <span class="highlight">AKPRO_boy</span> ko – (Original creator of Desi SMP )for epic SMP episodes, fun shorts and giveaways!</p>
+    <a href="https://youtube.com/@AKPRO_boy1" class="yt-button" target="_blank">Subscribe Now</a>
+  </div>
+
+  <div class="section">
+    <h2>✨ Join Now!</h2>
+    <p>Server me aao aur apna safar shuru karo <span class="highlight">Desi SMP</span> ke sath. Har din naye dost, naye fights aur naye memes!</p>
+  </div>
+</div>
+
+<script>
+  function copyIP() {
+    const ip = document.getElementById('server-ip').innerText;
+    navigator.clipboard.writeText(ip).then(() => {
+      alert("✅ IP Copied: " + ip);
+    });
+  }
+
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const stars = [];
+  for (let i = 0; i < 100; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5,
+      speedY: Math.random() * 0.3 + 0.1
+    });
+  }
+
+  function animateStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff";
+    stars.forEach(star => {
+      star.y += star.speedY;
+      if (star.y > canvas.height) {
+        star.y = 0;
+        star.x = Math.random() * canvas.width;
+      }
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+      ctx.fill();
+    });
+    requestAnimationFrame(animateStars);
+  }
+
+  animateStars();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
